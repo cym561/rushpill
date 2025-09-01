@@ -1,0 +1,275 @@
+:root{
+    --red: #ef4444;
+    --red-dark: #b91c1c;
+    --dark: #111827;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, Arial, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.836), rgba(0, 0, 0, 0.836)), url('original.jpg') center/cover fixed no-repeat;
+}
+
+
+#head{
+  font-size: 34px;
+}
+
+#menu{
+  color: #fff;
+  font-size: 24px;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    padding: 28px 20px;
+}
+
+/* Stage wraps everything and controls glassy look */
+#stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Glassy unified style */
+   background: transparent;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    padding: 16px; /* optional */
+}
+
+/* HUD */
+#hud {
+    background: rgba(16, 18, 22, 0.027);
+    padding: 8px 12px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    z-index: 4;
+}
+
+#hud span {
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: #111827;
+    color: #fff;
+}
+
+/* Canvas: now transparent to inherit stage styling */
+canvas {
+    width: 100%;
+    height: auto;
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    background: transparent;
+    z-index: 2;
+}
+
+.panel {
+  width: min(260px, 92vw);
+  padding: 10px;
+  border-radius: 16px;
+   background: rgba(255, 255, 255, 0.15);  /* glassy sidebar */
+    backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+#startOverlay .start-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    z-index: 3;  /* ensures above overlay */
+    
+    backdrop-filter: none;
+}
+
+.start-btn {
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 0;
+    font-weight: 800;
+    font-size: 14px;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(239,68,68,.35);
+    cursor: pointer;
+}
+
+.start-btn:hover{
+    box-shadow: 0 0 5px var(--red), 0 0 25px var(--red), 0 0 50px var(--red);
+}
+
+/* Choices buttons */
+
+#p-style{
+  font-weight: 600;
+
+}
+.choices {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+}
+
+.choices button {
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: 0;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-red { background: #ef4444; box-shadow: 0 6px 16px rgba(239,68,68,.35);}
+.btn-blue { background: #3b82f6; box-shadow: 0 6px 16px rgba(59,130,246,.35);}
+.btn-green { background: #10b981; box-shadow: 0 6px 16px rgba(16,185,129,.35);}
+
+#gameover{
+   position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+     backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    z-index: 2;
+}
+
+#againBtn {
+    
+    padding: 12px;
+    color: #fff;
+    border-radius: 5px;
+    background: var(--red);
+    box-shadow: 0 8px 24px rgba(77, 74, 74, 0.15);
+}
+#over, #summary{
+  color: #fff;
+}
+
+/* Sidebar (desktop) */
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    width: 350px;
+    padding: 30px;
+    margin-left: 70px;
+    border-radius: 16px;
+   background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 5;
+    
+}
+
+#sidebar h2 {
+    margin: 2px 0 6px 2px;
+    font-size: 20px;
+}
+
+#sidebar button {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 0;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    background: var(--red);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+   
+}
+
+#sidebar button:hover { 
+   box-shadow: 0px 15px 20px rgba(189, 69, 69, 0.836);
+   transform: translateY(-7px);
+}
+#sidebar button:active { transform: translateY(1px); }
+#sidebar button:disabled { opacity: .55; cursor: not-allowed; }
+.btn-dark { background: var(--dark) !important; }
+
+/* Mobile sidebar toggle */
+#menuToggle { display: none; }
+
+@media (max-width: 568px) {
+    #app {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    #menuToggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 22px;
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        z-index: 1100;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    #menuToggle span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: var(--red);
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    #menuToggle.open span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+    #menuToggle.open span:nth-child(2) { opacity: 0; }
+    #menuToggle.open span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+
+    #sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: min(280px, 80vw);
+        padding: 20px;
+        transition: right 0.3s ease;
+         background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        z-index: 1000;
+    }
+
+    #sidebar.open { right: 0; }
+}
+
+  
